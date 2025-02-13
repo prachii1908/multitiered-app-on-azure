@@ -2,8 +2,8 @@ on: [push]
 name: AKS_CNCF_Services_WorkFlow
 
 env:
-  CLUSTER_NAME: 'cncfazcluster'
-  CLUSTER_RESOURCE_GROUP: 'CNCF-Azure-RG'
+  CLUSTER_NAME: 'z-aks-stere-eastus-01'
+  CLUSTER_RESOURCE_GROUP: 'z-rg-stere-eastus-01'
 
 jobs:
     build-and-deploy:
