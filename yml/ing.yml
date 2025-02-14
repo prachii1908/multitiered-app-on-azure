@@ -9,7 +9,10 @@ spec:
   - host: stereproject.in
     http:
       paths:
-      - backend:
-          serviceName: conexp-frontend-svc
-          servicePort: 80
-        path: /
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: conexp-frontend-svc
+              port:
+                number: 80

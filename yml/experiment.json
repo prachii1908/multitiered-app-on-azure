@@ -1,0 +1,44 @@
+{
+  "location": "centralus",
+  "identity": {
+    "type": "SystemAssigned"
+  },
+  "properties": {
+    "steps": [
+      {
+        "name": "AKS pod kill",
+        "branches": [
+          {
+            "name": "AKS pod kill",
+            "actions": [
+              {
+                "type": "continuous",
+                "selectorId": "Selector1",
+                "duration": "PT10M",
+                "parameters": [
+                  {
+                      "key": "jsonSpec",
+                      "value": "{\"action\":\"pod-failure\",\"mode\":\"all\",\"selector\":{\"namespaces\":[\"default\"]}}"
+                  }
+                ],
+                "name": "urn:csci:microsoft:azureKubernetesServiceChaosMesh:podChaos/2.2"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "selectors": [
+      {
+        "id": "Selector1",
+        "type": "List",
+        "targets": [
+          {
+            "type": "ChaosTarget",
+            "id": "/subscriptions/409c55f8-00cf-4563-87ce-19972d9effa7/resourceGroups/z-rg-stere-eastus-01/providers/Microsoft.ContainerService/managedClusters/z-aks-stere-eastus-01/providers/Microsoft.Chaos/targets/z-aks-stere-eastus-01"
+          }
+        ]
+      }
+    ]
+  }
+}
