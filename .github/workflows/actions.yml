@@ -20,9 +20,6 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
-        - name: Install Docker
-          uses: crazy-max/ghaction-setup-docker@v3.3.0  
 
         - name: 'Docker Login to ACR'
           uses: azure/docker-login@v1
