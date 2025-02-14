@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspnetapp
+  labels: 
+    app: aspnetapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aspnetapp
+  template:
+    metadata:
+      labels:
+        app: aspnetapp
+    spec:
+      containers:
+      - name: aspnetapp-image
+        image: "mcr.microsoft.com/dotnet/samples:aspnetapp"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aspnetapp
+spec:
+  selector:
+    app: aspnetapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---    
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: aspnetapp-ing
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/acme-challenge-type: http01
+spec:
+  tls:
+  - hosts:
+    - <Sub Domain>.<custom domain name>
+    secretName: letsencrypt-tls
+  rules:
+  - host: <Sub Domain>.<custom domain name>
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: aspnetapp
+          servicePort: 80

@@ -16,8 +16,8 @@ spec:
       key: FUNCTIONS_WORKER_RUNTIME
   parameters:
     usePodIdentity: "true"
-    userAssignedIdentityID: "63dd13aa-1de6-481c-a012-cd6e1274cb43"
-    keyvaultName: "z-kv-stere-eastus-01"
+    userAssignedIdentityID: ""
+    keyvaultName: "<Keyvault Name>"
     objects: |
       array:
         - |
@@ -32,6 +32,6 @@ spec:
           objectName: sendgridapi
           objectType: secret
           objectAlias: SENDGRID_API_KEY
-    tenantId: "713cbab7-b71d-44a5-8467-826107ca7dd1"
-    resourceGroup: "z-rg-stere-eastus-01"
-    subscriptionId: "409c55f8-00cf-4563-87ce-19972d9effa7"
+    tenantId: "<Tenant ID>"
+    resourceGroup: "<Cluster RG Name>"
+    subscriptionId: "<Subscription ID>"

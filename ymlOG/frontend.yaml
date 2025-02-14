@@ -4,7 +4,7 @@ metadata:
   name: frontend-deployment
   labels:
     app: conexp-frontend
-    aadpodidbinding: 'z-mi-stere-eastu'
+    aadpodidbinding: <identity name created>
 spec:
   replicas: 1
   selector:
@@ -14,19 +14,19 @@ spec:
     metadata:
       labels:
         app: conexp-frontend
-        aadpodidbinding: 'z-mi-stere-eastu'
+        aadpodidbinding: <identity name created>
     spec:
       containers:
       - name: frontend
-        image: zacrstereeastus01.azurecr.io/conexp/web:v1
+        image: <frontend image built>
         ports:
         - containerPort: 80  
         imagePullPolicy: Always
         env:
         - name: KeyVaultName
-          value: "z-kv-stere-eastus-01"
+          value: "<Keyvault Name>"
         - name: QueueName
-          value: "z-sq-stere-eastus-01"
+          value: "contosoexpenses"
         - name: ConfigValues__CostCenterAPIUrl
           value: "http://backend-svc.default.svc.cluster.local:80"
 ---
@@ -37,7 +37,6 @@ metadata:
   labels:
     app: conexp-frontend
 spec:
-  type: LoadBalancer
   selector:
     app: conexp-frontend
   ports:
