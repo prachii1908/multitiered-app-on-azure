@@ -42,7 +42,13 @@ jobs:
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/conexp/emaildispatcher:${{ github.sha }}
 
             cd ..
-        
+            #- name: 'Kubectl tool installer'
+            #description: 'Install a specific version of kubectl binary. Acceptable values are latest or any semantic version string like 1.15.0'
+            #inputs:
+            #version:
+            #description: 'Version of kubectl'
+            #required: true
+            # default: 'latest'
         - name: 'Set AKS Context'
           uses: azure/aks-set-context@v1
           with:
